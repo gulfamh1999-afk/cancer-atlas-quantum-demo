@@ -108,9 +108,11 @@ def _list_cohort_files(root):
     """Return (folder_name, parquet_path) preferring non-UMAP parquets."""
     out = []
     if not os.path.isdir(root): return out
-    for d in os.listdir(root):
-        sub = os.path.join(root, d)
-        if not os.path.isdir(sub):
+   for d in os.listdir(root):
+    sub = os.path.join(root, d)
+    if not os.path.isdir(sub):
+        continue
+    chosen = _find_non_umap_parquet(sub)
             continue
         chosen = _find_non_umap_parquet(sub)
         if chosen is None:
@@ -912,3 +914,4 @@ st.markdown("""
   This interactive is provided for pitch/demo purposes only. It summarizes public cell-line data and experimental metrics (IC50) alongside simulated quantum minima scores <em>(equation-backed & reproducible)</em>. Values are not medical advice and should not be used for patient treatment decisions. Any interpretations require independent validation in appropriate wet-lab and clinical settings. © 2025 Gfam Quantum.
 </div>
 """, unsafe_allow_html=True)
+
