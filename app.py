@@ -107,12 +107,11 @@ def _find_non_umap_parquet(folder: str) -> str | None:
 def _list_cohort_files(root):
     """Return (folder_name, parquet_path) preferring non-UMAP parquets."""
     out = []
-    if not os.path.isdir(root): return out
-   for d in os.listdir(root):
-    sub = os.path.join(root, d)
-    if not os.path.isdir(sub):
-        continue
-    chosen = _find_non_umap_parquet(sub)
+    if not os.path.isdir(root):
+        return out
+    for d in os.listdir(root):
+        sub = os.path.join(root, d)
+        if not os.path.isdir(sub):
             continue
         chosen = _find_non_umap_parquet(sub)
         if chosen is None:
@@ -509,7 +508,7 @@ button:hover, .stButton>button:hover { filter: brightness(1.05); }
 
 .footer { font-size: 12px; color: #0b1220; }
 
-/* legend card (light) */
+# legend card (light)
 .legend-card {
   font-size: 12.5px; line-height: 1.35;
   background: rgba(255,255,255,0.55);
@@ -520,7 +519,7 @@ button:hover, .stButton>button:hover { filter: brightness(1.05); }
 }
 .legend-dot { font-size: 16px; vertical-align: middle; margin-right: 6px; }
 
-/* ===== Dark theme component tweaks (only when theme=dark) ===== */
+# Dark theme tweaks
 html[data-theme="dark"] .app-title, body[data-theme="dark"] .app-title { color: #f2f5ff; text-shadow: none; }
 html[data-theme="dark"] .app-subtitle, body[data-theme="dark"] .app-subtitle { color:#e6ecff; }
 html[data-theme="dark"] .glass, body[data-theme="dark"] .glass {
@@ -914,4 +913,3 @@ st.markdown("""
   This interactive is provided for pitch/demo purposes only. It summarizes public cell-line data and experimental metrics (IC50) alongside simulated quantum minima scores <em>(equation-backed & reproducible)</em>. Values are not medical advice and should not be used for patient treatment decisions. Any interpretations require independent validation in appropriate wet-lab and clinical settings. © 2025 Gfam Quantum.
 </div>
 """, unsafe_allow_html=True)
-
